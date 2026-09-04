@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>曼弗雷德：遗忘实验 · 数字装置</title>
+<meta name="description" content="以拜伦三幕诗剧《曼弗雷德》（曹元勇译）为底本的三幕交互数字装置：一次注定失败的遗忘实验。">
+<link rel="stylesheet" href="assets/css/installation.css">
+</head>
+<body class="installation">
+
+<canvas id="stage" aria-hidden="true"></canvas>
+<div id="vignette" aria-hidden="true"></div>
+
+<!-- 油灯 HUD -->
+<div id="lamp-hud" aria-hidden="true">
+  <svg viewBox="0 0 40 46" width="40" height="46">
+    <defs>
+      <radialGradient id="lh-halo" cx="50%" cy="42%" r="50%">
+        <stop offset="0%" stop-color="#e8a24b" stop-opacity=".8"/>
+        <stop offset="100%" stop-color="#e8a24b" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="lh-flame" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#c96f2e"/>
+        <stop offset="55%" stop-color="#eebb72"/>
+        <stop offset="100%" stop-color="#f8e3ae"/>
+      </linearGradient>
+    </defs>
+    <circle class="halo" cx="20" cy="18" r="17" fill="url(#lh-halo)"/>
+    <path class="flame" d="M20 8 C24.6 14, 24.2 19, 20 22 C15.8 19, 15.4 14, 20 8 Z" fill="url(#lh-flame)"/>
+    <path d="M11 24 h18 l-2.4 9 h-13.2 Z" fill="#1b2233" stroke="#41506b" stroke-width="1"/>
+    <rect x="13" y="33" width="14" height="3" fill="#2a3450"/>
+    <path d="M15 36 h10 l-1.4 5 h-7.2 Z" fill="#1b2233" stroke="#41506b" stroke-width="1"/>
+  </svg>
+</div>
+
+<!-- HUD -->
+<div id="hud">
+  <button id="audio-toggle" class="hud-btn" type="button">音效 开</button>
+  <a class="hud-btn" href="read.html">读本</a>
+  <a class="hud-btn" href="atlas.html">档案</a>
+  <button id="restart-btn" class="hud-btn" type="button">重来</button>
+</div>
+
+<!-- 竖排幕次 -->
+<div id="scene-title" aria-live="polite"></div>
+
+<!-- 剧场 -->
+<main id="theater">
+  <div id="text-column" aria-live="polite"></div>
+</main>
+
+<div id="choices" role="group" aria-label="选择"></div>
+<div id="advance-hint">轻触 · 继续</div>
+
+<!-- 入场门 -->
+<div id="gate">
+  <div class="eyebrow">A DIGITAL INSTALLATION · FOR BYRON'S MANFRED · 1817—2026</div>
+  <h1>曼弗雷德</h1>
+  <div class="sub">遗 忘 实 验</div>
+  <p class="epigraph">
+    「霍拉旭，天地之间有许多事物，<br>
+    是你们的哲学所未能梦想到的。」
+    <span class="src">——《哈姆雷特》·《曼弗雷德》卷首引</span>
+  </p>
+  <button id="light-btn" type="button">点 灯</button>
+  <div class="fine">
+    据三幕诗剧《曼弗雷德》曹元勇译本 · 建议佩戴耳机 · 全程约十余分钟<br>
+    你的任何一次选择都无法改变结局——这不是缺陷，是主题。<br>
+    <a href="read.html">全文读本</a> · <a href="essays.html">解读文集</a> · <a href="atlas.html">档案馆</a> · <a href="installation.html">策展手册</a>
+  </div>
+</div>
+
+<script src="assets/js/audio.js"></script>
+<script src="assets/js/scenes.js"></script>
+<script src="assets/js/installation.js"></script>
+</body>
+</html>

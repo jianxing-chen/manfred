@@ -1,0 +1,310 @@
+/* ============================================================
+   曼弗雷德：遗忘实验 —— 装置（夜世界）
+   ============================================================ */
+:root {
+  --night: #0a1020;
+  --snowlight: #dce6f2;
+  --glacier: #7fa8c9;
+  --lampflame: #e8a24b;
+  --bloodstain: #a34a4a;
+  --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body.installation {
+  margin: 0;
+  background: #04060c;
+  color: var(--snowlight);
+  font-family: var(--serif);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#stage { position: fixed; inset: 0; display: block; }
+
+/* 暗角 */
+#vignette {
+  position: fixed; inset: 0; pointer-events: none; z-index: 2;
+  background: radial-gradient(ellipse at 50% 42%, transparent 52%, rgba(2,4,9,.55) 100%);
+  transition: opacity 2s;
+}
+body.epilogue #vignette { background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(90,104,128,.35) 100%); }
+
+/* ---------- 剧场 ---------- */
+#theater {
+  position: fixed; inset: 0; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 4.5rem 1.4rem 7.5rem;
+}
+#text-column {
+  max-width: 36rem;
+  width: 100%;
+  text-align: center;
+}
+#text-column .who {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .5em;
+  color: var(--glacier);
+  opacity: .85;
+  margin: 1.6rem 0 .8rem;
+}
+#text-column .who.manfred { color: var(--lampflame); }
+#text-column .ln {
+  margin: 0 0 .55rem;
+  font-size: 1.06rem;
+  line-height: 2.15;
+  letter-spacing: .12em;
+  text-shadow: 0 0 18px rgba(10,16,32,.9);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: ln-in 1.1s cubic-bezier(.2,.7,.2,1) forwards;
+}
+@keyframes ln-in { to { opacity: 1; transform: translateY(0); } }
+
+/* 台词变体 */
+#text-column .ln.spirit { color: #b9cfe4; }
+#text-column .ln.big {
+  font-size: clamp(1.7rem, 5.4vw, 2.6rem);
+  letter-spacing: .3em;
+  line-height: 1.8;
+  margin: 1.2rem 0;
+  color: #f2e7d4;
+  text-shadow: 0 0 34px rgba(232,162,75,.28), 0 0 4px rgba(232,162,75,.4);
+}
+#text-column .ln.curse { color: #d8a0a0; }
+#text-column .ln.astarte {
+  letter-spacing: .8em;
+  font-size: 1.35rem;
+  color: #e8eff8;
+  animation-duration: 2.8s;
+}
+#text-column .ln.astarte-slow {
+  letter-spacing: .4em;
+  font-size: 1.1rem;
+  color: #d5e1ef;
+  animation-duration: 2.4s;
+}
+#text-column .ln.narr { color: #93a5bd; font-size: .95rem; letter-spacing: .2em; }
+#text-column .ln.dirn { color: #64748f; font-size: .85rem; letter-spacing: .22em; margin: 1rem 0; }
+#text-column .ln.whisper { color: #7d8fa8; font-size: .9rem; }
+#text-column .ln.metaline { color: var(--lampflame); font-size: .92rem; letter-spacing: .24em; margin-top: 1.6rem; }
+#text-column .gap { height: 1.1rem; }
+
+/* 竖排幕次标题 */
+#scene-title {
+  position: fixed;
+  top: 5.2rem; right: 1.6rem;
+  z-index: 4;
+  writing-mode: vertical-rl;
+  letter-spacing: .7em;
+  font-size: 1.5rem;
+  color: rgba(220,230,242,.4);
+  opacity: 0;
+  transition: opacity 1.6s ease;
+  pointer-events: none;
+}
+#scene-title.show { opacity: 1; }
+#scene-title .place {
+  margin-top: 1.4rem;
+  font-size: .72rem;
+  letter-spacing: .4em;
+  color: rgba(127,168,201,.5);
+}
+
+/* ---------- 选择（脚灯） ---------- */
+#choices {
+  position: fixed;
+  left: 0; right: 0; bottom: 5.6rem;
+  z-index: 5;
+  display: none;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1.4rem;
+}
+#choices.show { display: flex; animation: choices-in .9s ease both; }
+@keyframes choices-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+#choices button {
+  font-family: var(--serif);
+  font-size: .95rem;
+  letter-spacing: .3em;
+  color: #cfdcec;
+  background: rgba(10,16,32,.55);
+  border: 1px solid rgba(150,172,205,.35);
+  padding: .8rem 1.7rem .8rem 2rem;
+  cursor: pointer;
+  position: relative;
+  transition: border-color .3s, color .3s, box-shadow .3s, transform .3s;
+}
+#choices button:hover, #choices button:focus-visible {
+  border-color: var(--lampflame);
+  color: #f2e7d4;
+  box-shadow: 0 0 24px rgba(232,162,75,.18);
+  outline: none;
+}
+#choices button.reject { border-color: rgba(232,162,75,.55); }
+#choices button.kneel { color: #b8c4d6; }
+#choices button.ash {
+  pointer-events: none;
+  animation: to-ash 1.1s ease forwards;
+}
+@keyframes to-ash {
+  30% { border-color: rgba(200,140,90,.8); color: #e8b784; }
+  100% {
+    opacity: 0;
+    transform: translateY(10px) scale(.94);
+    filter: blur(3px) grayscale(1);
+    letter-spacing: .6em;
+  }
+}
+/* 按住反抗 */
+#choices button.hold { min-width: 15rem; }
+#choices button.hold .bar {
+  position: absolute; left: 0; bottom: 0; height: 2px; width: 0%;
+  background: var(--lampflame);
+  box-shadow: 0 0 12px rgba(232,162,75,.6);
+  transition: width .1s linear;
+}
+
+/* 点击推进提示 */
+#advance-hint {
+  position: fixed; bottom: 2.2rem; left: 0; right: 0;
+  text-align: center; z-index: 5;
+  font-size: .74rem; letter-spacing: .5em; color: rgba(127,168,201,.55);
+  opacity: 0;
+  transition: opacity .8s ease;
+  pointer-events: none;
+}
+#advance-hint.show { animation: hint-breathe 3s ease-in-out infinite; }
+@keyframes hint-breathe { 0%,100% { opacity: .25; } 50% { opacity: .8; } }
+
+/* ---------- HUD ---------- */
+#hud {
+  position: fixed; top: 1.1rem; right: 1.3rem; z-index: 6;
+  display: flex; align-items: center; gap: .9rem;
+}
+#hud .hud-btn {
+  background: transparent; border: 1px solid rgba(150,172,205,.28);
+  color: rgba(207,220,236,.75);
+  font-family: var(--mono);
+  font-size: .68rem; letter-spacing: .22em;
+  padding: .42rem .8rem;
+  cursor: pointer;
+  transition: border-color .3s, color .3s;
+}
+#hud .hud-btn:hover { border-color: rgba(232,162,75,.6); color: #f2e7d4; }
+#hud a.hud-btn { text-decoration: none; }
+#lamp-hud {
+  position: fixed; top: 1.05rem; left: 1.3rem; z-index: 6;
+  width: 40px; height: 46px; pointer-events: none;
+}
+#lamp-hud .flame { transform-origin: 50% 100%; animation: flame-sway 2.4s ease-in-out infinite; }
+#lamp-hud .halo { animation: halo-pulse 2.4s ease-in-out infinite; }
+#lamp-hud.dying .flame, #lamp-hud.dying .halo { animation: none; }
+@keyframes flame-sway { 0%,100% { transform: scaleY(1) scaleX(1); } 50% { transform: scaleY(1.12) scaleX(.9); } }
+@keyframes halo-pulse { 0%,100% { opacity: .5; } 50% { opacity: .95; } }
+
+/* ---------- 入场门（gate） ---------- */
+#gate {
+  position: fixed; inset: 0; z-index: 10;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 2rem 1.4rem;
+  background: rgba(4,6,12,.55);
+  transition: opacity 1.8s ease, visibility 1.8s;
+}
+#gate.hidden { opacity: 0; visibility: hidden; }
+#gate .eyebrow {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .6em;
+  color: rgba(127,168,201,.75); margin-bottom: 2.2rem;
+}
+#gate h1 {
+  margin: 0 0 1.1rem;
+  font-size: clamp(3rem, 11vw, 5.4rem);
+  font-weight: 700;
+  letter-spacing: .55em; text-indent: .55em;
+  color: #e9eff8;
+  text-shadow: 0 0 60px rgba(127,168,201,.35);
+}
+#gate .sub {
+  font-size: .95rem; letter-spacing: .5em; text-indent: .5em;
+  color: rgba(207,220,236,.85); margin-bottom: 2.6rem;
+}
+#gate .epigraph {
+  max-width: 30em; font-size: .9rem; line-height: 2.3; color: #93a5bd;
+  margin-bottom: 3rem;
+}
+#gate .epigraph .src { display: block; margin-top: .8rem; font-size: .78rem; letter-spacing: .3em; color: #64748f; }
+#gate #light-btn {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  letter-spacing: .9em; text-indent: .9em;
+  color: #0a0d14;
+  background: linear-gradient(180deg, #f0c284, #cf8f42);
+  border: none;
+  padding: 1.05rem 2.6rem 1.05rem 3.5rem;
+  cursor: pointer;
+  border-radius: 2px;
+  box-shadow: 0 0 40px rgba(232,162,75,.35), 0 0 6px rgba(232,162,75,.5);
+  transition: transform .3s, box-shadow .3s;
+}
+#gate #light-btn:hover, #gate #light-btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 0 60px rgba(232,162,75,.5), 0 0 8px rgba(232,162,75,.7);
+  outline: none;
+}
+#gate .fine {
+  margin-top: 2.4rem;
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .28em;
+  color: rgba(100,116,143,.85); line-height: 2.4;
+}
+#gate .fine a { color: rgba(127,168,201,.9); text-decoration: none; border-bottom: 1px solid rgba(127,168,201,.3); }
+
+/* ---------- 终幕白场 ---------- */
+body.epilogue #text-column .ln { color: #3d4a5e; text-shadow: none; }
+body.epilogue #text-column .ln.metaline { color: #7a5a30; }
+body.epilogue #scene-title { color: rgba(60,76,100,.5); }
+
+/* 忘却按钮的失败 */
+#choices button.forget { border-color: rgba(160,190,220,.5); }
+#choices button.forget.fail {
+  animation: forget-fail 1.2s ease forwards;
+}
+@keyframes forget-fail {
+  0% { transform: translateX(0); }
+  18% { transform: translateX(-7px); }
+  36% { transform: translateX(6px); }
+  54% { transform: translateX(-4px); }
+  72% { transform: translateX(3px); }
+  100% { transform: translateX(0); opacity: .55; }
+}
+
+/* 崩落效果（第七精灵） */
+body.collapse #theater {
+  animation: theater-collapse 2.4s cubic-bezier(.5,0,.8,.4) forwards;
+}
+@keyframes theater-collapse {
+  0% { filter: none; transform: none; }
+  35% { filter: blur(1.5px); transform: translateY(6px) rotate(.4deg); }
+  100% { filter: blur(6px) brightness(.4); transform: translateY(70px) rotate(2deg); }
+}
+
+/* 尊重减弱动效 */
+@media (prefers-reduced-motion: reduce) {
+  #text-column .ln { animation-duration: .01s; animation-delay: 0s !important; transform: none; }
+  #choices.show { animation: none; }
+  #lamp-hud .flame, #lamp-hud .halo { animation: none; }
+  body.collapse #theater { animation: none; filter: brightness(.5); }
+}
+
+/* 小屏 */
+@media (max-width: 640px) {
+  #scene-title { display: none; }
+  #theater { padding: 4rem 1.1rem 8rem; }
+  #text-column .ln { font-size: .98rem; }
+}

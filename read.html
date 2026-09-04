@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>读本 · 曼弗雷德（曹元勇 译）</title>
+<meta name="description" content="拜伦三幕诗剧《曼弗雷德》全文读本，曹元勇译本。">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+body { font-size: 16.5px; }
+.reader-main { padding-bottom: 3rem; }
+.reader-tip { max-width: var(--measure); margin: 1.8rem auto 0; padding: 0 1.4rem; color: var(--ink-faint); font-size: .84rem; }
+.reader-tip a { color: var(--glacier-ink); }
+</style>
+</head>
+<body>
+<header class="site-nav">
+  <a class="brand" href="index.html"><span class="cn">曼弗雷德</span><span class="en">MANFRED / 1817</span></a>
+  <nav>
+    <a href="index.html">装置</a>
+    <a href="read.html" aria-current="page">读本</a>
+    <a href="essays.html">文集</a>
+    <a href="atlas.html">档案</a>
+    <a href="installation.html">策展手册</a>
+  </nav>
+</header>
+
+<div class="reader-shell">
+  <aside class="reader-aside" id="toc"><h2>目 次</h2></aside>
+  <main class="reader-main">
+    <div class="play-front">
+      <div class="title-cn">曼弗雷德</div>
+      <div class="title-sub">诗 剧</div>
+      <div class="translator">[英] 乔治·戈登·拜伦 著 · 曹元勇 译</div>
+      <div class="epigraph" id="epigraph"></div>
+      <div class="persons">
+        <h3>剧 中 人 物</h3>
+        <ul id="persons"></ul>
+      </div>
+      <div class="place">
+        <h3>地 点</h3>
+        <p id="setting"></p>
+      </div>
+    </div>
+    <div id="play"></div>
+    <div class="play-notes" id="notes">
+      <h3>注 释</h3>
+      <ul id="notes-list"></ul>
+    </div>
+    <div class="reader-tip">
+      欲知这盏灯为何而点，可进入 <a href="index.html">数字装置《遗忘实验》</a>；
+      关于此剧的种种回声，见 <a href="atlas.html">档案馆</a> 与 <a href="essays.html">文集</a>。
+    </div>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="inner">
+    《曼弗雷德：遗忘实验》——以拜伦《曼弗雷德》（曹元勇译本）为锚点的多形态项目。
+    本页为全文读本，仅供本地阅读与研究；译文版权归原作者与出版方所有。
+    英文原文属公有领域（Project Gutenberg《The Works of Lord Byron, Vol. 4》）。
+  </div>
+</footer>
+
+<button class="lamp-widget" id="lamp-widget" title="回到顶部" aria-label="回到顶部">
+  <svg viewBox="0 0 44 44" width="44" height="44">
+    <defs>
+      <radialGradient id="lw-halo" cx="50%" cy="45%" r="50%">
+        <stop offset="0%" stop-color="#e8a24b" stop-opacity=".65"/>
+        <stop offset="100%" stop-color="#e8a24b" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="lw-flame" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#c96f2e"/>
+        <stop offset="55%" stop-color="#eebb72"/>
+        <stop offset="100%" stop-color="#f8e3ae"/>
+      </linearGradient>
+    </defs>
+    <circle class="halo" cx="22" cy="17" r="16" fill="url(#lw-halo)"/>
+    <path class="flame" d="M22 8 C26.2 13.4, 25.8 18, 22 20.8 C18.2 18, 17.8 13.4, 22 8 Z" fill="url(#lw-flame)"/>
+    <path d="M14 22.5 h16 l-2.2 8 h-11.6 Z" fill="#fff" stroke="#a03a2e" stroke-width="1.2"/>
+    <rect x="15.8" y="30.5" width="12.4" height="2.6" fill="#e9e3d3" stroke="#a03a2e" stroke-width="1"/>
+    <path d="M17.6 33.1 h8.8 l-1.2 4.4 h-6.4 Z" fill="#fff" stroke="#a03a2e" stroke-width="1.2"/>
+  </svg>
+</button>
+
+<script src="assets/js/data-manfred.js"></script>
+<script>
+(function () {
+  "use strict";
+  const M = window.MANFRED;
+  const NUMS = ["一", "二", "三", "四"];
+  const $ = (s) => document.querySelector(s);
+
+  /* 卷首 */
+  $("#epigraph").innerHTML = M.epigraph.filter(l => l !== "").join("<br>");
+  $("#persons").innerHTML = M.persons.map(p => "<li>" + p + "</li>").join("");
+  $("#setting").textContent = M.setting;
+
+  /* 目次 */
+  const toc = $("#toc");
+  M.acts.forEach(a => {
+    const al = document.createElement("a");
+    al.href = "#act-" + a.n;
+    al.className = "act-link";
+    al.textContent = "第" + NUMS[a.n - 1] + "幕";
+    toc.appendChild(al);
+    a.scenes.forEach(s => {
+      const sl = document.createElement("a");
+      sl.href = "#act-" + a.n + "-scene-" + s.n;
+      sl.className = "sc-link";
+      sl.textContent = "第" + NUMS[s.n - 1] + "场";
+      toc.appendChild(sl);
+    });
+  });
+
+  /* 正文 */
+  const play = $("#play");
+  const frag = document.createDocumentFragment();
+  M.acts.forEach(a => {
+    const block = document.createElement("section");
+    block.className = "act-block";
+    block.id = "act-" + a.n;
+    const banner = document.createElement("div");
+    banner.className = "act-banner";
+    banner.innerHTML = '<span class="mark">ACT ' + ["I", "II", "III"][a.n - 1] + '</span><h2>第' + NUMS[a.n - 1] + '幕</h2>';
+    block.appendChild(banner);
+    a.scenes.forEach(s => {
+      const sb = document.createElement("section");
+      sb.className = "scene-block";
+      sb.id = "act-" + a.n + "-scene-" + s.n;
+      const head = document.createElement("div");
+      head.className = "scene-head";
+      head.innerHTML = '<span class="no">第' + NUMS[s.n - 1] + '场</span><span class="place">' + (s.place || "") + "</span>";
+      sb.appendChild(head);
+      s.content.forEach(item => {
+        if (item.t === "direction") {
+          const d = document.createElement("div");
+          d.className = "direction";
+          d.textContent = item.text;
+          sb.appendChild(d);
+        } else {
+          const sp = document.createElement("div");
+          sp.className = "speech";
+          const who = document.createElement("div");
+          who.className = "who";
+          who.textContent = item.who;
+          sp.appendChild(who);
+          const verse = document.createElement("div");
+          verse.className = "verse";
+          verse.innerHTML = item.lines.map(l => '<span class="ln">' + l + "</span>").join("");
+          sp.appendChild(verse);
+          sb.appendChild(sp);
+        }
+      });
+      block.appendChild(sb);
+    });
+    frag.appendChild(block);
+  });
+  play.appendChild(frag);
+
+  /* 注释 */
+  $("#notes-list").innerHTML = M.notes.map(n => {
+    const m = n.match(/^\[(\d+|\*)\]/);
+    const mk = m ? m[1] : "※";
+    const body = n.replace(/^\[(\d+|\*)\]\s*/, "");
+    return '<li><span class="mk">[' + mk + ']</span>' + body + "</li>";
+  }).join("");
+
+  /* 油灯：回到顶部 */
+  const lamp = document.getElementById("lamp-widget");
+  lamp.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+})();
+</script>
+</body>
+</html>

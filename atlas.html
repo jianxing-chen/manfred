@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>档案馆 · 曼弗雷德：遗忘实验</title>
+<meta name="description" content="《曼弗雷德》影响年表、阿尔卑斯地图书、人物志、概念词典、名家评论与双语对照。">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header class="site-nav">
+  <a class="brand" href="index.html"><span class="cn">曼弗雷德</span><span class="en">MANFRED / 1817</span></a>
+  <nav>
+    <a href="index.html">装置</a>
+    <a href="read.html">读本</a>
+    <a href="essays.html">文集</a>
+    <a href="atlas.html" aria-current="page">档案</a>
+    <a href="installation.html">策展手册</a>
+  </nav>
+</header>
+
+<div class="page-head">
+  <div class="eyebrow">ARCHIVE · 档案馆</div>
+  <h1>档案馆</h1>
+  <p class="lede">一个文本离开它的作者之后去了哪里？这里是它漂流两百余年的行李清单：一部年表、一张地图书、一份人物志、一部概念词典，和一圈回声。</p>
+</div>
+
+<!-- ================= 年表 ================= -->
+<section class="atlas-section" id="sec-timeline">
+  <h2><span class="no">壹</span>影响年表</h2>
+  <ul class="timeline" id="timeline"></ul>
+</section>
+
+<!-- ================= 地图 ================= -->
+<section class="atlas-section" id="sec-map">
+  <h2><span class="no">贰</span>阿尔卑斯地图书</h2>
+  <div class="map-wrap">
+    <svg viewBox="0 0 760 540" role="img" aria-label="《曼弗雷德》事件地图书：伯尔尼阿尔卑斯">
+      <defs>
+        <style>
+          .ink { stroke: #476e8e; fill: none; stroke-width: 1.1; }
+          .ink-soft { stroke: #476e8e; opacity: .45; fill: none; stroke-width: .8; }
+          .lbl { font-family: "Noto Serif SC","Songti SC","STSong",serif; fill: #1c1a17; font-size: 14px; letter-spacing: 2px; }
+          .lbl-sm { font-family: ui-monospace,Menlo,monospace; fill: #55504a; font-size: 9px; letter-spacing: 1.5px; }
+          .mark-no { font-family: ui-monospace,Menlo,monospace; fill: #a03a2e; font-size: 11px; }
+          .mark { fill: none; stroke: #a03a2e; stroke-width: 1.4; }
+        </style>
+      </defs>
+      <rect x="8" y="8" width="744" height="524" fill="rgba(255,255,255,.25)" stroke="#a03a2e" stroke-opacity=".35" stroke-width="1"/>
+
+      <!-- 冰川与湖 -->
+      <path class="ink-soft" d="M120 150 C180 170, 220 210, 300 235 C340 248, 380 250, 430 262" stroke-dasharray="1 5" stroke-linecap="round"/>
+      <path class="ink" d="M90 400 C140 385, 200 398, 240 420 C260 432, 270 448, 262 470 C240 478, 200 470, 170 452 C140 434, 110 418, 90 400 Z" opacity=".5"/>
+      <text class="lbl-sm" x="150" y="446">BRIENZERSEE 布里恩茨湖</text>
+
+      <!-- 山脊群 -->
+      <path class="ink" d="M60 260 L140 120 L180 190 L240 70 L290 170 L340 110 L400 220"/>
+      <path class="ink" d="M400 220 L470 90 L540 200 L610 130 L700 260"/>
+      <path class="ink-soft" d="M80 300 L160 210 L230 280 L320 200 L420 300 L520 220 L640 310 L700 290"/>
+
+      <!-- 少女峰三峰 -->
+      <path class="ink" d="M300 150 L340 60 L380 150 M340 60 L340 150" />
+      <text class="lbl-sm" x="308" y="52">JUNGFRAU 少女峰</text>
+
+      <!-- ① 城堡 -->
+      <g>
+        <path class="mark" d="M420 148 l0 -34 l8 8 l8 -8 l8 8 l8 -8 l0 34 Z"/>
+        <line class="mark" x1="452" y1="114" x2="452" y2="102"/>
+        <text class="mark-no" x="466" y="112">①</text>
+        <text class="lbl" x="466" y="128">曼弗雷德的城堡</text>
+        <text class="lbl-sm" x="466" y="142">THE CASTLE</text>
+      </g>
+
+      <!-- ② 悬崖（跳崖处） -->
+      <g>
+        <path class="mark" d="M340 170 l10 20 l-20 2 Z"/>
+        <text class="mark-no" x="300" y="196">②</text>
+        <text class="lbl" x="252" y="214">少女峰悬崖 · 第一幕</text>
+        <text class="lbl-sm" x="252" y="228">ON THE JUNGFRAU</text>
+      </g>
+
+      <!-- ③ 猎人茅舍 -->
+      <g>
+        <path class="mark" d="M180 320 l12 -10 l12 10 l0 12 l-24 0 Z"/>
+        <text class="mark-no" x="160" y="348">③</text>
+        <text class="lbl" x="112" y="366">羚羊猎人的茅舍</text>
+        <text class="lbl-sm" x="112" y="380">THE HUT</text>
+      </g>
+
+      <!-- ④ 瀑布与魔女 -->
+      <g>
+        <path class="mark" d="M520 330 c0 14, 0 22, 0 34 M512 336 c0 12, 0 20, 0 30 M528 336 c0 12, 0 20, 0 30"/>
+        <path class="ink-soft" d="M500 372 q20 14, 40 0"/>
+        <text class="mark-no" x="540" y="336">④</text>
+        <text class="lbl" x="548" y="352">大瀑布 · 魔女的虹雾</text>
+        <text class="lbl-sm" x="548" y="366">THE WATERFALL</text>
+      </g>
+
+      <!-- ⑤ 修道院 -->
+      <g>
+        <path class="mark" d="M96 500 l0 -20 l6 5 l6 -5 l0 20 Z M84 500 l0 -14 l4 4 l4 -4 l0 14"/>
+        <text class="mark-no" x="118" y="496">⑤</text>
+        <text class="lbl" x="130" y="510">圣·摩雷斯修道院</text>
+        <text class="lbl-sm" x="130" y="523">ST. MAURICE</text>
+      </g>
+
+      <!-- ⑥ 阿里曼涅斯殿堂：画在地图边界之外的地底 -->
+      <g>
+        <path class="ink" d="M8 532 l744 0" opacity=".6"/>
+        <circle class="mark" cx="380" cy="516" r="6"/>
+        <path class="mark" d="M380 522 l0 10 M362 516 l-18 8 M398 516 l18 8" stroke-dasharray="3 3"/>
+        <text class="mark-no" x="404" y="516">⑥</text>
+        <text class="lbl" x="418" y="521">阿里曼涅斯的殿堂——无方位，在图外，在地下</text>
+      </g>
+
+      <!-- 罗盘与比例尺 -->
+      <g opacity=".8">
+        <circle class="ink-soft" cx="684" cy="72" r="22"/>
+        <path class="mark" d="M684 54 l6 20 l-6 -4 l-6 4 Z"/>
+        <text class="lbl-sm" x="678" y="46">N</text>
+      </g>
+      <g opacity=".8">
+        <line class="ink" x1="560" y1="480" x2="680" y2="480"/>
+        <line class="ink" x1="560" y1="474" x2="560" y2="486"/>
+        <line class="ink" x1="680" y1="474" x2="680" y2="486"/>
+        <text class="lbl-sm" x="566" y="470">一日脚程 · 十二天写成</text>
+      </g>
+    </svg>
+  </div>
+  <p class="map-note">⑥号地点的殿堂被刻意画在图框之外：它不在地理之内。全剧其余事件都发生在伯尔尼高地一日脚程之内——1816年9月，拜伦用十二天走完并写完它们。</p>
+</section>
+
+<!-- ================= 人物志 ================= -->
+<section class="atlas-section" id="sec-people">
+  <h2><span class="no">叁</span>人物志</h2>
+  <div class="people-grid" id="people"></div>
+</section>
+
+<!-- ================= 概念词典 ================= -->
+<section class="atlas-section" id="sec-concepts">
+  <h2><span class="no">肆</span>概念词典</h2>
+  <div class="concept-list" id="concepts"></div>
+</section>
+
+<!-- ================= 音乐与图像 ================= -->
+<section class="atlas-section" id="sec-music">
+  <h2><span class="no">伍</span>回声一：音乐</h2>
+  <div id="music"></div>
+</section>
+
+<section class="atlas-section" id="sec-paintings">
+  <h2><span class="no">陆</span>回声二：图像</h2>
+  <div id="paintings"></div>
+</section>
+
+<!-- ================= 双语对照 ================= -->
+<section class="atlas-section" id="sec-bilingual">
+  <h2><span class="no">柒</span>回声三：双语对照</h2>
+  <p class="lede" style="margin-bottom:2rem; color: var(--ink-soft);">中文均摘自曹元勇译本；英文摘自 Project Gutenberg《The Works of Lord Byron, Vol. 4》（公有领域），已逐句核对。</p>
+  <div class="bilingual-list" id="bilingual"></div>
+</section>
+
+<!-- ================= 名家评论 ================= -->
+<section class="atlas-section" id="sec-critics">
+  <h2><span class="no">捌</span>名家评论（录自本书辑录）</h2>
+  <div class="critics" id="critics"></div>
+</section>
+
+<footer class="site-footer">
+  <div class="inner">
+    本页数据整理自《曼弗雷德 该隐：拜伦诗剧两部》（曹元勇译）及其附录年表、辑评；
+    音乐与美术史实经公开资料核实。仅供本地阅读与研究。
+  </div>
+</footer>
+
+<button class="lamp-widget" id="lamp-widget" title="回到顶部" aria-label="回到顶部">
+  <svg viewBox="0 0 44 44" width="44" height="44">
+    <defs>
+      <radialGradient id="lw-halo3" cx="50%" cy="45%" r="50%">
+        <stop offset="0%" stop-color="#e8a24b" stop-opacity=".65"/>
+        <stop offset="100%" stop-color="#e8a24b" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="lw-flame3" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#c96f2e"/>
+        <stop offset="55%" stop-color="#eebb72"/>
+        <stop offset="100%" stop-color="#f8e3ae"/>
+      </linearGradient>
+    </defs>
+    <circle class="halo" cx="22" cy="17" r="16" fill="url(#lw-halo3)"/>
+    <path class="flame" d="M22 8 C26.2 13.4, 25.8 18, 22 20.8 C18.2 18, 17.8 13.4, 22 8 Z" fill="url(#lw-flame3)"/>
+    <path d="M14 22.5 h16 l-2.2 8 h-11.6 Z" fill="#fff" stroke="#a03a2e" stroke-width="1.2"/>
+    <rect x="15.8" y="30.5" width="12.4" height="2.6" fill="#e9e3d3" stroke="#a03a2e" stroke-width="1"/>
+    <path d="M17.6 33.1 h8.8 l-1.2 4.4 h-6.4 Z" fill="#fff" stroke="#a03a2e" stroke-width="1.2"/>
+  </svg>
+</button>
+
+<script src="assets/js/data-curator.js"></script>
+<script>
+(function () {
+  "use strict";
+  const C = window.CURATOR;
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+  /* 年表 */
+  $("#timeline").innerHTML = C.timeline.map(e =>
+    '<li class="' + (e.tag === "诞生" || e.tag === "音乐" ? "major" : "") + '">' +
+    '<span class="yr">' + esc(e.year) + '</span><span class="tag">' + esc(e.tag) + '</span>' +
+    '<p>' + esc(e.text) + '</p></li>').join("");
+
+  /* 人物 */
+  $("#people").innerHTML = C.characters.map(p =>
+    '<article class="person-card"><header><h3>' + esc(p.name) + '</h3>' +
+    '<span class="latin">' + esc(p.latin) + '</span><span class="role">' + esc(p.role) + '</span></header>' +
+    '<p>' + esc(p.who) + '</p>' +
+    '<div class="p-line">' + p.lines.map(l => '<em>' + esc(l) + '</em>').join("<br>") + '</div></article>').join("");
+
+  /* 概念 */
+  $("#concepts").innerHTML = C.concepts.map((c, i) =>
+    '<details' + (i === 0 ? " open" : "") + '><summary><span class="term">' + esc(c.term) + '</span>' +
+    '<span class="latin">' + esc(c.latin) + '</span><span class="plus">＋</span></summary>' +
+    '<div class="body">' + esc(c.text) + '</div></details>').join("");
+
+  /* 音乐 */
+  $("#music").innerHTML = C.musicworks.map(w =>
+    '<article class="work-card"><header><h3>' + esc(w.composer) + '：' + esc(w.work) + '</h3>' +
+    '<span class="catalog">' + esc(w.catalog) + '</span><span class="year">' + esc(w.year) + '</span></header>' +
+    '<p>' + esc(w.note) + '</p>' +
+    (w.movements ? '<ul class="mv">' + w.movements.map(m =>
+      '<li><span class="no">' + esc(m.no) + '</span><span class="tempo">' + esc(m.tempo) + '</span><span class="txt">' + esc(m.text) + '</span></li>').join("") + '</ul>' : "") +
+    '</article>').join("");
+
+  /* 图像 */
+  $("#paintings").innerHTML = C.paintings.map(p =>
+    '<article class="work-card"><header><h3>' + esc(p.artist) + '：' + esc(p.title) + '</h3>' +
+    '<span class="catalog">' + esc(p.year) + '</span></header><p>' + esc(p.note) + '（' + esc(p.where) + '）</p></article>').join("");
+
+  /* 双语 */
+  const byId = Object.fromEntries(C.quotes.map(q => [q.id, q]));
+  $("#bilingual").innerHTML = C.bilingual.map(id => {
+    const q = byId[id];
+    if (!q) return "";
+    return '<div class="pair"><p class="zh">「' + esc(q.zh) + '」' +
+      (q.en ? '<span class="en">' + esc(q.en).replace(/\//g, "<br>") + '</span>' : "") +
+      '<span class="ref">第' + "一二三"[q.act - 1] + '幕 第' + "一二三四"[q.scene - 1] + '场 · ' + esc(q.who) + '</span></div>';
+  }).join("");
+
+  /* 名家评论 */
+  $("#critics").innerHTML = C.critics.map(c =>
+    '<div class="critic-card"><blockquote>「' + esc(c.text) + '」</blockquote>' +
+    '<span class="who">—— ' + esc(c.who) + (c.latin ? '（' + esc(c.latin) + '）' : '') + '</span>' +
+    '<span class="where">' + esc(c.where) + '</span></div>').join("");
+
+  /* 油灯 */
+  const lamp = document.getElementById("lamp-widget");
+  lamp.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+})();
+</script>
+</body>
+</html>
