@@ -214,6 +214,7 @@
         setTimeout(() => st.classList.add("show"), 900);
       }
       document.body.classList.remove("epilogue");
+      document.body.classList.remove("collapse");
       if (sc.id === "epilogue") document.body.classList.add("epilogue");
       $("#lamp-hud").classList.toggle("dying", !(sc.lamp > 0));
     }
@@ -223,15 +224,23 @@
   function clearColumn() {
     col.style.transition = "opacity .34s ease";
     col.style.opacity = "0";
-    return new Promise(r => setTimeout(() => { col.innerHTML = ""; col.style.opacity = "1"; r(); }, 360));
+    return new Promise(r => setTimeout(() => { col.innerHTML = ""; col.style.opacity = "1"; r(); }, CLEAR_MS));
   }
+
+  /* 测试模式：?fast=1 缩短全部等待（供自动化走查） */
+  const FAST = /[?&]fast=1/.test(location.search);
+  const STAGGER = FAST ? 40 : 620;
+  const STAGGER_SLOW = FAST ? 90 : 1400;
+  const CLEAR_MS = FAST ? 60 : 360;
+  const TAIL = FAST ? 250 : 900;
 
   function lineEl(l, idx) {
     const d = document.createElement("div");
     d.className = "ln " + (l.cls || "");
     d.textContent = l.t;
-    const stagger = (l.cls === "astarte" || l.cls === "astarte-slow") ? 1400 : 620;
-    d.style.animationDelay = (idx * stagger / 1000) + "s";
+    const slow = l.cls === "astarte" || l.cls === "astarte-slow";
+    d.style.animationDelay = (idx * (slow ? STAGGER_SLOW : STAGGER) / 1000) + "s";
+    if (FAST) d.style.animationDuration = ".15s";
     return d;
   }
 
@@ -248,6 +257,7 @@
     state.i = i;
     if (autoTimer) { clearTimeout(autoTimer); autoTimer = null; }
     const beat = state.scene.beats[i];
+    hint.classList.remove("show");
     choicesEl.classList.remove("show");
     choicesEl.innerHTML = "";
     await clearColumn();
@@ -260,8 +270,8 @@
       }
       col.appendChild(lineEl(l, vi++));
     });
-    const per = lines.reduce((a, l) => a + ((l.cls === "astarte" || l.cls === "astarte-slow") ? 1400 : 620), 800);
-    const total = REDUCED ? 200 : per + 900;
+    const per = lines.reduce((a, l) => a + ((l.cls === "astarte" || l.cls === "astarte-slow") ? STAGGER_SLOW : STAGGER), TAIL);
+    const total = REDUCED ? 200 : per + (FAST ? 150 : 900);
 
     /* 特效 */
     if (beat.fx === "her-face") audio.bellStrike("small");
@@ -280,7 +290,10 @@
       if (beat.choices) { renderChoices(beat); return; }
       if (beat.hold) { renderHold(beat); return; }
       hint.classList.add("show");
-      if (beat.auto) autoTimer = setTimeout(() => { autoTimer = null; nextBeat(); }, beat.auto);
+      if (beat.auto) {
+        const ms = FAST ? Math.min(400, beat.auto) : beat.auto;
+        autoTimer = setTimeout(() => { autoTimer = null; nextBeat(); }, ms);
+      }
     }, total);
   }
 
@@ -305,12 +318,15 @@
   }
 
   function specialAction(special, btn) {
+    // 动画期间禁用兄弟按钮，避免被抢点绕过
+    [...btn.parentElement.children].forEach(x => { if (x !== btn) x.style.pointerEvents = "none"; });
+    const WAIT = FAST ? 250 : null;
     if (special === "ash-1" || special === "ash-2") {
       btn.classList.add("ash");
       audio.bellStrike("small");
       setTimeout(() => {
         gotoBeat(special === "ash-1" ? "ash-1-result" : "ash-2-result");
-      }, 1500);
+      }, WAIT || 1500);
       return;
     }
     if (special === "jump") {
@@ -318,8 +334,8 @@
       stage.blackout();
       setTimeout(() => {
         gotoBeat("after-jump");
-        setTimeout(() => stage.resume(), 500);
-      }, 900);
+        setTimeout(() => stage.resume(), FAST ? 80 : 500);
+      }, WAIT || 900);
       return;
     }
     if (special === "forget") {
@@ -327,7 +343,7 @@
       audio.bellStrike("dark");
       setTimeout(() => {
         gotoBeat("forget-fail");
-      }, 1400);
+      }, WAIT || 1400);
       return;
     }
     if (special === "restart") { location.reload(); return; }
@@ -354,6 +370,7 @@
 
   function renderHold(beat) {
     const hold = beat.hold;
+    const holdMs = FAST ? 500 : hold.ms;
     choicesEl.innerHTML = "";
     const b = document.createElement("button");
     b.type = "button";
@@ -362,11 +379,11 @@
     choicesEl.appendChild(b);
     choicesEl.classList.add("show");
     const bar = b.querySelector(".bar");
-    let progress = 0, raf = null, holding = false, lastTs = 0, done = false;
+    let accum = 0, lastTs = null, holding = false, done = false;
     const whisperQueue = (hold.whis || []).slice();
     let injected = 0;
 
-    const stop = () => { holding = false; };
+    const stop = () => { holding = false; lastTs = null; };
     const onKey = (e) => { if (e.key === " " || e.key === "Enter") { holding = true; } };
     const onKeyUp = (e) => { if (e.key === " " || e.key === "Enter") { holding = false; } };
     b.addEventListener("pointerdown", () => { holding = true; });
@@ -377,25 +394,30 @@
     const finish = () => {
       if (done) return;
       done = true;
-      cancelAnimationFrame(raf);
       window.removeEventListener("pointerup", stop);
       choicesEl.classList.remove("show");
       audio.bellStrike("act");
       gotoBeat("defiance");
     };
-    const step = (ts) => {
-      if (done) return;
-      const dt = ts - (lastTs || ts); lastTs = ts;
-      if (holding) progress += dt / hold.ms;
-      bar.style.width = Math.min(100, progress * 100) + "%";
-      while (injected < whisperQueue.length && progress >= whisperQueue[injected].at) {
-        const w = whisperQueue[injected++];
-        col.appendChild(lineEl(w, 0));
+    /* 绝对时间累积 + setInterval 驱动：后台标签 rAF 停摆时仍能正确推进 */
+    let lastTick = performance.now();
+    const timer = setInterval(() => {
+      if (done) { clearInterval(timer); return; }
+      const now = performance.now();
+      if (holding) {
+        accum += Math.min(400, now - lastTick);
+        lastTick = now;
+        const progress = Math.min(1, accum / holdMs);
+        bar.style.width = (progress * 100) + "%";
+        while (injected < whisperQueue.length && progress >= whisperQueue[injected].at) {
+          const w = whisperQueue[injected++];
+          col.appendChild(lineEl(w, 0));
+        }
+        if (progress >= 1) { clearInterval(timer); finish(); }
+      } else {
+        lastTick = now;
       }
-      if (progress >= 1) { finish(); return; }
-      raf = requestAnimationFrame(step);
-    };
-    raf = requestAnimationFrame(step);
+    }, 120);
   }
 
   /* 推进交互 */

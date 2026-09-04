@@ -205,6 +205,8 @@ body.epilogue #vignette { background: radial-gradient(ellipse at 50% 45%, transp
 #lamp-hud .flame { transform-origin: 50% 100%; animation: flame-sway 2.4s ease-in-out infinite; }
 #lamp-hud .halo { animation: halo-pulse 2.4s ease-in-out infinite; }
 #lamp-hud.dying .flame, #lamp-hud.dying .halo { animation: none; }
+#lamp-hud.dying .flame { opacity: .12; }
+#lamp-hud.dying .halo { opacity: 0; }
 @keyframes flame-sway { 0%,100% { transform: scaleY(1) scaleX(1); } 50% { transform: scaleY(1.12) scaleX(.9); } }
 @keyframes halo-pulse { 0%,100% { opacity: .5; } 50% { opacity: .95; } }
 
@@ -269,6 +271,18 @@ body.epilogue #vignette { background: radial-gradient(ellipse at 50% 45%, transp
 body.epilogue #text-column .ln { color: #3d4a5e; text-shadow: none; }
 body.epilogue #text-column .ln.metaline { color: #7a5a30; }
 body.epilogue #scene-title { color: rgba(60,76,100,.5); }
+body.epilogue #choices button {
+  color: #3d4a5e;
+  border-color: rgba(60,74,98,.55);
+  background: rgba(255,255,255,.5);
+}
+body.epilogue #choices button.reject { border-color: rgba(122,90,48,.7); color: #5a3f1e; }
+body.epilogue #choices button:hover, body.epilogue #choices button:focus-visible {
+  border-color: #a86f33; color: #2c3648; box-shadow: 0 0 18px rgba(168,111,51,.25);
+}
+body.epilogue #advance-hint { color: rgba(90,104,128,.7); }
+body.epilogue #hud .hud-btn { color: #55617a; border-color: rgba(60,74,98,.4); }
+body.epilogue #hud a.hud-btn { color: #55617a; }
 
 /* 忘却按钮的失败 */
 #choices button.forget { border-color: rgba(160,190,220,.5); }
