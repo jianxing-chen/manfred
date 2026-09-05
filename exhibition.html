@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>午夜，一盏灯 · 曼弗雷德虚拟展览</title>
+<meta name="description" content="《曼弗雷德》虚拟展览《午夜，一盏灯》：九个展厅、一盏随行灯——一次可步入的展线。">
+<link rel="stylesheet" href="assets/css/exhibition.css">
+</head>
+<body class="exhibition">
+
+<canvas id="stage" aria-hidden="true"></canvas>
+<div id="vignette" aria-hidden="true"></div>
+
+<!-- 展签 -->
+<div id="plate" aria-live="polite"></div>
+
+<!-- HUD -->
+<div id="hud">
+  <div id="lamp-card" title="随行灯卡">
+    <svg viewBox="0 0 30 34" width="26" height="30" aria-hidden="true">
+      <defs>
+        <radialGradient id="ex-halo" cx="50%" cy="40%" r="50%">
+          <stop offset="0%" stop-color="#e8a24b" stop-opacity=".8"/>
+          <stop offset="100%" stop-color="#e8a24b" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="ex-flame" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="#c96f2e"/>
+          <stop offset="55%" stop-color="#eebb72"/>
+          <stop offset="100%" stop-color="#f8e3ae"/>
+        </linearGradient>
+      </defs>
+      <circle class="halo" cx="15" cy="12" r="12" fill="url(#ex-halo)"/>
+      <path class="flame" d="M15 4 C18.2 8.4, 17.9 11.6, 15 13.8 C12.1 11.6, 11.8 8.4, 15 4 Z" fill="url(#ex-flame)"/>
+      <path d="M9 15.5 h12 l-1.7 6.4 h-8.6 Z" fill="#1b2233" stroke="#41506b" stroke-width="1"/>
+      <path d="M10.8 21.9 h6.4 l-1 4 h-4.4 Z" fill="#1b2233" stroke="#41506b" stroke-width="1"/>
+    </svg>
+    <span class="pct">灯焰未点</span>
+  </div>
+  <button id="audio-toggle" class="hud-btn" type="button">音效 开</button>
+  <a class="hud-btn" href="installation.html">手册</a>
+  <a class="hud-btn" href="index.html">离馆</a>
+</div>
+
+<!-- 展线平面图 -->
+<div id="plan" aria-hidden="true">
+  <div class="plan-label">展 线</div>
+  <svg viewBox="0 0 226 26" width="226" height="26"></svg>
+</div>
+
+<!-- 字幕 -->
+<div id="subs" aria-live="polite"></div>
+
+<!-- 提示与求愿输入 -->
+<div id="prompts"></div>
+<div id="wish-box">
+  <input id="wish-input" type="text" maxlength="24" placeholder="向宇宙说出你的请求……" aria-label="你的请求">
+  <button id="wish-send" type="button">说</button>
+</div>
+
+<!-- 尾声致谢 -->
+<div id="credits">
+  <div class="eyebrow">EXHIBITION END · 谢绝回头的展览</div>
+  <h2>出口</h2>
+  <p>展览到此结束。曼弗雷德求而不得的忘却，同样没有授予你——你带着全部的灯焰、判词与脚印离开，这正是展览唯一的意图。</p>
+  <p class="footnote"></p>
+  <div class="links">
+    <a href="exhibition.html" onclick="location.reload()">重走一次</a>
+    <a href="read.html">全文读本</a>
+    <a href="index.html">数字装置</a>
+    <a href="atlas.html">档案馆</a>
+    <a href="installation.html">策展手册</a>
+  </div>
+</div>
+
+<!-- 入场海报 -->
+<div id="gate">
+  <div class="eyebrow">A VIRTUAL EXHIBITION FOR BYRON'S MANFRED</div>
+  <h1>午夜，一盏灯</h1>
+  <div class="sub">曼弗雷德 · 虚拟展览</div>
+  <p class="desc">
+    九个展厅，一条单行展线，一盏随你逐厅变暗的灯。<br>
+    七个可以逐一听见的声音、一面会碎的镜子、一枚只会重复一句话的按钮、<br>
+    一块跪不下去的跪垫、一间单人黑屋、一场按不住的午夜——<br>
+    以及尽头那颗<em>永远不会亮的「忘却」按钮</em>。
+  </p>
+  <button id="enter-btn" type="button">步 入 展 览</button>
+  <div class="fine">
+    据《策展手册》九厅方案建成 · 文本 曹元勇译《曼弗雷德》 · 建议佩戴耳机 · 约 15–20 分钟<br>
+    <a href="index.html">数字装置</a> · <a href="read.html">全文读本</a> · <a href="essays.html">文集</a> · <a href="atlas.html">档案馆</a>
+  </div>
+</div>
+
+<script src="assets/js/audio.js"></script>
+<script src="assets/js/exhibition.js"></script>
+</body>
+</html>
