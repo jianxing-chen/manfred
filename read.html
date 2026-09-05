@@ -169,6 +169,45 @@ body { font-size: 16.5px; }
   /* 油灯：回到顶部 */
   const lamp = document.getElementById("lamp-widget");
   lamp.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  /* 联动目录：滚动时在目次中标注当前读到的幕/场 */
+  const sections = [...play.querySelectorAll(".act-block, .scene-block")];
+  const linkById = {};
+  toc.querySelectorAll("a").forEach(a => { linkById[a.getAttribute("href").slice(1)] = a; });
+  let curId = null;
+  function mark(id) {
+    Object.values(linkById).forEach(a => a.classList.remove("cur", "cur-act"));
+    if (!id) return;
+    const a = linkById[id];
+    if (a) a.classList.add("cur");
+    const m = id.match(/^(act-\d+)-scene-\d+$/);
+    if (m && linkById[m[1]]) linkById[m[1]].classList.add("cur-act");
+  }
+  function spy() {
+    const probe = window.innerHeight * 0.28;
+    let active = null;
+    for (const s of sections) {
+      if (s.getBoundingClientRect().top <= probe) active = s.id;
+      else break;
+    }
+    if (active !== curId) { curId = active; mark(active); }
+  }
+  toc.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (!a) return;
+    curId = a.getAttribute("href").slice(1);
+    mark(curId); /* 立即反馈；平滑滚动结束后 spy 会校准 */
+  });
+  let spyLast = 0;
+  window.addEventListener("scroll", () => {
+    const now = performance.now();
+    if (now - spyLast < 80) return;
+    spyLast = now;
+    spy(); /* 同步执行，不依赖 rAF（后台/节流环境亦可靠） */
+  }, { passive: true });
+  window.addEventListener("resize", spy);
+  setInterval(spy, 400); /* 兜底：滚动恢复、锚点跳转、事件被节流的环境 */
+  spy();
 })();
 </script>
 </body>

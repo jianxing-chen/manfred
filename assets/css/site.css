@@ -182,10 +182,12 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
   font-size: .74rem; letter-spacing: .3em; color: var(--ink-faint);
   margin: 0 0 .7rem; font-weight: 400;
 }
-.reader-aside a { display: block; color: var(--ink-soft); text-decoration: none; padding: .16rem 0; }
+.reader-aside a { display: block; color: var(--ink-soft); text-decoration: none; padding: .16rem 0; border-left: 2px solid transparent; }
 .reader-aside a:hover { color: var(--zhubatch); }
-.reader-aside .act-link { letter-spacing: .2em; margin-top: .8rem; }
-.reader-aside .sc-link { padding-left: .9em; color: var(--ink-faint); }
+.reader-aside .act-link { letter-spacing: .2em; margin-top: .8rem; padding-left: .5rem; }
+.reader-aside .sc-link { padding-left: 1.4rem; color: var(--ink-faint); }
+.reader-aside a.cur { color: var(--zhubatch); border-left-color: var(--zhubatch); }
+.reader-aside a.cur-act { color: var(--zhubatch); border-left-color: rgba(160, 58, 46, .45); }
 
 .reader-main { min-width: 0; padding: 0 1.4rem 4rem; }
 
