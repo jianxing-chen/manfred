@@ -53,21 +53,49 @@
 <div id="choices" role="group" aria-label="选择"></div>
 <div id="advance-hint">轻触 · 继续</div>
 
-<!-- 入场门 -->
+<!-- 入场门：点灯 → 门厅 -->
 <div id="gate">
-  <div class="eyebrow">A DIGITAL INSTALLATION · FOR BYRON'S MANFRED · 1817—2026</div>
-  <h1>曼弗雷德</h1>
-  <div class="sub">遗 忘 实 验</div>
-  <p class="epigraph">
-    「霍拉旭，天地之间有许多事物，<br>
-    是你们的哲学所未能梦想到的。」
-    <span class="src">——《哈姆雷特》·《曼弗雷德》卷首引</span>
-  </p>
-  <button id="light-btn" type="button">点 灯</button>
-  <div class="fine">
-    据三幕诗剧《曼弗雷德》曹元勇译本 · 建议佩戴耳机 · 全程约十余分钟<br>
-    你的任何一次选择都无法改变结局——这不是缺陷，是主题。<br>
-    <a href="exhibition.html">虚拟展览</a> · <a href="read.html">全文读本</a> · <a href="essays.html">解读文集</a> · <a href="atlas.html">档案馆</a> · <a href="installation.html">策展手册</a>
+  <div id="gate-front">
+    <div class="eyebrow">A DIGITAL INSTALLATION · FOR BYRON'S MANFRED · 1817—2026</div>
+    <h1>曼弗雷德</h1>
+    <div class="sub">遗 忘 实 验</div>
+    <p class="epigraph">
+      「霍拉旭，天地之间有许多事物，<br>
+      是你们的哲学所未能梦想到的。」
+      <span class="src">——《哈姆雷特》·《曼弗雷德》卷首引</span>
+    </p>
+    <button id="light-btn" type="button">点 灯</button>
+    <div class="fine">
+      据三幕诗剧《曼弗雷德》曹元勇译本 · 建议佩戴耳机<br>
+      你的任何一次选择都无法改变结局——这不是缺陷，是主题。
+    </div>
+  </div>
+
+  <div id="foyer" class="hidden">
+    <div class="eyebrow">门 厅 · 灯 已 点 亮</div>
+    <p class="thesis">
+      同一部诗剧的两次空间化——一次在时间里发生，一次在空间里重演。<br>
+      两扇门通向同一个结局：你的任何选择都无法改变它。
+    </p>
+    <div class="doors">
+      <a class="door" id="door-theater" href="#theater-door">
+        <span class="door-no">其一 · 剧场</span>
+        <span class="door-name">遗忘实验</span>
+        <span class="door-desc">三幕交互叙事 · 生成音景<br>约十余分钟 · 灯焰伴你至终幕</span>
+        <span class="door-go">入 戏</span>
+      </a>
+      <a class="door door-museum" id="door-museum" href="exhibition.html">
+        <span class="door-no">其二 · 展馆</span>
+        <span class="door-name">午夜，一盏灯</span>
+        <span class="door-desc">九厅展线 · 随行灯卡逐厅变暗<br>约 15–20 分钟 · 脚印留在雪里</span>
+        <span class="door-go">步 入</span>
+      </a>
+    </div>
+    <div class="wing">
+      <a href="read.html">读本<span>曹元勇译全剧 · 联动目次</span></a>
+      <a href="essays.html">文集<span>六篇解读</span></a>
+      <a href="atlas.html">档案<span>两百年回声</span></a>
+    </div>
   </div>
 </div>
 

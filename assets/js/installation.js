@@ -172,7 +172,7 @@
         ] },
         { id: "forget-fail", lines: [{ cls: "big", t: "我们做不到。" }, { cls: "whisper", t: "——七个精灵" }, { cls: "metaline", t: "遗忘从来不归任何力量支配。你得把一切带回人间。" }], choices: [
           { label: "再试一次", special: "forget" },
-          { label: "重新开始", special: "restart" },
+          { label: "步入展览", special: "link-exhibition" },
           { label: "读《曼弗雷德》全文", special: "link-read" },
           { label: "走进档案", special: "link-atlas" }
         ] }
@@ -347,6 +347,7 @@
       return;
     }
     if (special === "restart") { location.reload(); return; }
+    if (special === "link-exhibition") { location.href = "exhibition.html"; return; }
     if (special === "link-read") { location.href = "read.html"; return; }
     if (special === "link-atlas") { location.href = "atlas.html"; return; }
   }
@@ -442,11 +443,19 @@
   });
   $("#restart-btn").addEventListener("click", () => location.reload());
 
-  /* 入场 */
+  /* 入场：点灯 → 门厅；剧场门开戏 */
   $("#light-btn").addEventListener("click", () => {
-    $("#gate").classList.add("hidden");
     audio.start();
     audio.apply("overture");
+    $("#gate").classList.add("lit");
+    const front = $("#gate-front");
+    front.classList.add("veiled");
+    setTimeout(() => { front.style.display = "none"; }, 1000);
+    $("#foyer").classList.remove("hidden");
+  });
+  $("#door-theater").addEventListener("click", (e) => {
+    e.preventDefault();
+    $("#gate").classList.add("hidden");
     state.started = true;
     setScene(SCENES[0], -1);
   });

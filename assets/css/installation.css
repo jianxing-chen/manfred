@@ -322,3 +322,77 @@ body.collapse #theater {
   #theater { padding: 4rem 1.1rem 8rem; }
   #text-column .ln { font-size: .98rem; }
 }
+
+/* ---------- 门厅（点灯后） ---------- */
+#gate-front { transition: opacity 1s ease; }
+#gate-front.veiled { opacity: 0; pointer-events: none; }
+#gate.lit { background: rgba(4,6,12,.42); }
+#foyer { display: flex; flex-direction: column; align-items: center; }
+#foyer.hidden { display: none; }
+#foyer .eyebrow {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .5em;
+  color: rgba(232,162,75,.85); margin-bottom: 1.6rem;
+  animation: ln-in 1.4s ease both;
+}
+#foyer .thesis {
+  margin: 0 0 2.4rem; font-size: .92rem; line-height: 2.2;
+  letter-spacing: .12em; color: #93a5bd; max-width: 34em;
+  animation: ln-in 1.6s .2s ease both;
+}
+#foyer .doors { display: flex; gap: 1.6rem; justify-content: center; flex-wrap: wrap; }
+#foyer .door {
+  display: flex; flex-direction: column; align-items: center; gap: .55rem;
+  width: 15.5rem; padding: 2.1rem 1.4rem 1.6rem;
+  text-decoration: none; position: relative;
+  background: linear-gradient(180deg, rgba(10,16,32,.55), rgba(6,9,16,.75));
+  border: 1px solid rgba(150,172,205,.3);
+  transition: border-color .35s, box-shadow .35s, transform .35s;
+  animation: ln-in 1.6s .45s ease both;
+}
+#foyer .door::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(180deg, rgba(232,162,75,.9), rgba(232,162,75,.1));
+}
+#foyer .door-museum::before {
+  background: linear-gradient(180deg, rgba(127,168,201,.9), rgba(127,168,201,.1));
+}
+#foyer .door:hover, #foyer .door:focus-visible {
+  border-color: rgba(232,162,75,.6);
+  box-shadow: 0 0 40px rgba(232,162,75,.14), inset 0 0 30px rgba(232,162,75,.05);
+  transform: translateY(-3px);
+  outline: none;
+}
+#foyer .door-museum:hover, #foyer .door-museum:focus-visible {
+  border-color: rgba(127,168,201,.65);
+  box-shadow: 0 0 40px rgba(127,168,201,.16), inset 0 0 30px rgba(127,168,201,.05);
+}
+#foyer .door-no { font-family: var(--mono); font-size: .66rem; letter-spacing: .4em; color: #64748f; }
+#foyer .door-name { font-size: 1.5rem; letter-spacing: .34em; text-indent: .34em; color: #e9eff8; font-weight: 700; }
+#foyer .door-desc { font-size: .76rem; line-height: 1.9; letter-spacing: .14em; color: #7d8fa8; text-align: center; }
+#foyer .door-go {
+  margin-top: .9rem; font-size: .84rem; letter-spacing: .5em; text-indent: .5em;
+  color: var(--lampflame); border: 1px solid rgba(232,162,75,.4); padding: .5rem 1.1rem;
+  transition: background .3s, color .3s;
+}
+#foyer .door-museum .door-go { color: var(--glacier); border-color: rgba(127,168,201,.4); }
+#foyer .door:hover .door-go { background: rgba(232,162,75,.12); }
+#foyer .door-museum:hover .door-go { background: rgba(127,168,201,.12); }
+#foyer .wing {
+  margin-top: 2.3rem; display: flex; gap: 2.2rem; flex-wrap: wrap; justify-content: center;
+  animation: ln-in 1.6s .7s ease both;
+}
+#foyer .wing a {
+  display: flex; flex-direction: column; gap: .15rem; text-decoration: none;
+  font-size: .95rem; letter-spacing: .3em; color: #cfdcec;
+  border-bottom: 1px solid rgba(150,172,205,.25); padding-bottom: .35rem;
+  transition: color .3s, border-color .3s;
+}
+#foyer .wing a span { font-size: .68rem; letter-spacing: .18em; color: #64748f; }
+#foyer .wing a:hover { color: var(--lampflame); border-color: rgba(232,162,75,.5); }
+@media (prefers-reduced-motion: reduce) {
+  #foyer .eyebrow, #foyer .thesis, #foyer .door, #foyer .wing { animation: none; }
+}
+@media (max-width: 700px) {
+  #foyer .doors { flex-direction: column; align-items: center; }
+  #foyer .wing { gap: 1.2rem; }
+}

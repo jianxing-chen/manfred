@@ -202,3 +202,4 @@ body.snowlight #plan text { fill: #55617a; }
   #subs { bottom: 8.2rem; }
   #subs .cap .body { font-size: .9rem; }
 }
+#credits .motto { font-size: .95rem; letter-spacing: .14em; color: #476e8e; border-left: 2px solid #a86f33; padding-left: 1rem; text-align: left; }
