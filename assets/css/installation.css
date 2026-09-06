@@ -402,4 +402,5 @@ body.collapse #theater {
 /* 卷首引：全角引号悬挂补偿（「墨迹偏右半格、」偏左半格，机械居中会显歪） */
 #gate .epigraph { text-indent: -0.5em; }
 #gate .epigraph .hang-end { margin-right: -.5em; }
-#gate .epigraph .src { margin-right: -.3em; text-indent: 0; }
+#gate .epigraph { width: max-content; max-width: 100%; margin-left: auto; margin-right: auto; }
+#gate .epigraph .src { display: block; text-align: right; text-indent: 0; margin-right: -.3em; padding-right: .35em; }

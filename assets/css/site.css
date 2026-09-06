@@ -442,4 +442,6 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 
 /* 卷首引：引号悬挂补偿 */
 .play-front .epigraph { text-indent: -.5em; }
+.play-front .epigraph { width: max-content; max-width: 100%; }
 .play-front .epigraph .hang-end { margin-right: -.5em; }
+.play-front .epigraph .src { display: block; text-align: right; padding-right: .35em; }
