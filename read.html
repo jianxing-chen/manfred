@@ -92,7 +92,16 @@ body { font-size: 16.5px; }
   const $ = (s) => document.querySelector(s);
 
   /* 卷首 */
-  $("#epigraph").innerHTML = M.epigraph.filter(l => l !== "").join("<br>");
+  /* 卷首引：孤行收尾引号并入上一行，行尾引号做悬挂补偿 */
+  const epiLines = [];
+  for (const l of M.epigraph) {
+    if (!l) continue;
+    if (/^[”"]$/.test(l) && epiLines.length) epiLines[epiLines.length - 1] += l;
+    else epiLines.push(l);
+  }
+  $("#epigraph").innerHTML = epiLines
+    .map((l, i) => (i > 0 && /[”"]$/.test(l) ? '<span class="hang-end">' + l + "</span>" : l))
+    .join("<br>");
   $("#persons").innerHTML = M.persons.map(p => "<li>" + p + "</li>").join("");
   $("#setting").textContent = M.setting;
 

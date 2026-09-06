@@ -439,3 +439,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
   position: absolute; width: 1px; height: 1px;
   clip: rect(0 0 0 0); overflow: hidden; white-space: nowrap;
 }
+
+/* 卷首引：引号悬挂补偿 */
+.play-front .epigraph { text-indent: -.5em; }
+.play-front .epigraph .hang-end { margin-right: -.5em; }

@@ -398,3 +398,8 @@ body.collapse #theater {
 }
 /* 点灯过渡：旧标题层绝对定位悬浮淡出，避免门厅塌陷跳位 */
 #gate-front.veiled { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+/* 卷首引：全角引号悬挂补偿（「墨迹偏右半格、」偏左半格，机械居中会显歪） */
+#gate .epigraph { text-indent: -0.5em; }
+#gate .epigraph .hang-end { margin-right: -.5em; }
+#gate .epigraph .src { margin-right: -.3em; text-indent: 0; }
